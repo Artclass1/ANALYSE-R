@@ -95,4 +95,8 @@
     max-width: 1200px !important;
     margin: 0 auto;
   }
+  .break-inside-avoid {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
 }

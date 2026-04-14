@@ -21,7 +21,6 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -243,49 +242,47 @@ export default function App() {
                   </div>
                 </div>
 
-                <Tabs defaultValue="History" className="w-full">
-                  <TabsList className="bg-[#00000000] border-b border-[#ffffff33] p-0 mb-8 w-full justify-start rounded-none h-auto">
-                    <TabsTrigger value="History" className="rounded-none border-b-2 border-[#00000000] data-[state=active]:border-[#ffffff] data-[state=active]:bg-[#00000000] data-[state=active]:text-[#ffffff] font-mono text-xs uppercase py-3 px-6">
-                      [ History ]
-                    </TabsTrigger>
-                    <TabsTrigger value="Present" className="rounded-none border-b-2 border-[#00000000] data-[state=active]:border-[#ffffff] data-[state=active]:bg-[#00000000] data-[state=active]:text-[#ffffff] font-mono text-xs uppercase py-3 px-6">
-                      [ Present ]
-                    </TabsTrigger>
-                    <TabsTrigger value="Future" className="rounded-none border-b-2 border-[#00000000] data-[state=active]:border-[#ffffff] data-[state=active]:bg-[#00000000] data-[state=active]:text-[#ffffff] font-mono text-xs uppercase py-3 px-6">
-                      [ Future ]
-                    </TabsTrigger>
-                  </TabsList>
-                  
-                  {["History", "Present", "Future"].map((p) => (
-                    <TabsContent key={p} value={p} className="space-y-8">
-                      <div className="grid md:grid-cols-2 gap-12">
-                        {report.sections.filter(s => s.perspective === p).map((section, i) => (
-                          <div key={i} className="space-y-4">
-                            <h3 className="text-2xl font-bold tracking-tight border-l-2 border-[#ffffff] pl-4">{section.title}</h3>
-                            <p className="text-muted-foreground leading-relaxed font-light">{section.content}</p>
-                            <div className="space-y-2 pt-4">
-                              <span className="text-[10px] uppercase tracking-widest font-mono font-bold opacity-50">Key Insights</span>
-                              <ul className="space-y-2 mt-2">
-                                {section.insights.map((insight, j) => (
-                                  <li key={j} className="flex items-start gap-2 text-sm font-mono">
-                                    <span className="text-[#ffffff80] shrink-0">{">"}</span>
-                                    <span>{insight}</span>
-                                  </li>
-                                ))}
-                              </ul>
+                <div className="w-full space-y-16">
+                  {["History", "Present", "Future"].map((p) => {
+                    const sections = report.sections.filter(s => s.perspective === p);
+                    if (sections.length === 0) return null;
+                    
+                    return (
+                      <section key={p} className="space-y-8 break-inside-avoid">
+                        <div className="border-b border-[#ffffff33] pb-4 mb-8">
+                          <h2 className="text-2xl font-mono font-bold uppercase tracking-widest text-[#ffffff]">
+                            [ {p} ]
+                          </h2>
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-12">
+                          {sections.map((section, i) => (
+                            <div key={i} className="space-y-4 break-inside-avoid">
+                              <h3 className="text-xl font-bold tracking-tight border-l-2 border-[#ffffff] pl-4">{section.title}</h3>
+                              <p className="text-muted-foreground leading-relaxed font-light">{section.content}</p>
+                              <div className="space-y-2 pt-4">
+                                <span className="text-[10px] uppercase tracking-widest font-mono font-bold opacity-50">Key Insights</span>
+                                <ul className="space-y-2 mt-2">
+                                  {section.insights.map((insight, j) => (
+                                    <li key={j} className="flex items-start gap-2 text-sm font-mono">
+                                      <span className="text-[#ffffff80] shrink-0">{">"}</span>
+                                      <span>{insight}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
                             </div>
-                          </div>
-                        ))}
-                      </div>
-                    </TabsContent>
-                  ))}
-                </Tabs>
+                          ))}
+                        </div>
+                      </section>
+                    );
+                  })}
+                </div>
 
                 <Separator className="bg-[#ffffff33]" />
 
                 {/* Quantitative Data Section */}
                 {report.quantitativeData && (
-                  <div className="space-y-12">
+                  <div className="space-y-12 break-inside-avoid">
                     <div className="flex items-center gap-3 border-b border-[#ffffff1a] pb-4">
                       <Database className="w-5 h-5" />
                       <h2 className="text-xl font-mono font-bold tracking-tight uppercase">Quantitative Analysis</h2>
@@ -293,7 +290,7 @@ export default function App() {
                     
                     <div className="grid lg:grid-cols-2 gap-12">
                       {/* Chart */}
-                      <div className="space-y-6">
+                      <div className="space-y-6 break-inside-avoid">
                         <h3 className="text-sm font-mono uppercase tracking-widest opacity-70">{report.quantitativeData.chartTitle}</h3>
                         <div className="h-[300px] w-full border border-[#ffffff1a] p-4 bg-[#ffffff05]">
                           <ResponsiveContainer width="100%" height="100%">
@@ -334,7 +331,7 @@ export default function App() {
                       </div>
 
                       {/* Data Table */}
-                      <div className="space-y-6">
+                      <div className="space-y-6 break-inside-avoid">
                         <h3 className="text-sm font-mono uppercase tracking-widest opacity-70">{report.quantitativeData.tableTitle}</h3>
                         <div className="overflow-x-auto border border-[#ffffff1a] bg-[#ffffff05]">
                           <table className="w-full text-left font-mono text-xs">
@@ -364,7 +361,7 @@ export default function App() {
                 <Separator className="bg-[#ffffff33]" />
 
                 <div className="grid md:grid-cols-3 gap-8">
-                  <Card className="bg-[#000000] border-[#ffffff33] rounded-none">
+                  <Card className="bg-[#000000] border-[#ffffff33] rounded-none break-inside-avoid">
                     <CardHeader className="border-b border-[#ffffff1a] pb-4">
                       <CardTitle className="text-xs font-mono uppercase tracking-widest flex items-center gap-2">
                         <BarChart3 className="w-4 h-4" /> Market Outlook
@@ -386,7 +383,7 @@ export default function App() {
                     </CardContent>
                   </Card>
 
-                  <Card className="bg-[#000000] border-[#ffffff33] rounded-none">
+                  <Card className="bg-[#000000] border-[#ffffff33] rounded-none break-inside-avoid">
                     <CardHeader className="border-b border-[#ffffff1a] pb-4">
                       <CardTitle className="text-xs font-mono uppercase tracking-widest flex items-center gap-2">
                         <ShieldAlert className="w-4 h-4" /> Risk Factors
@@ -404,7 +401,7 @@ export default function App() {
                     </CardContent>
                   </Card>
 
-                  <Card className="bg-[#000000] border-[#ffffff33] rounded-none">
+                  <Card className="bg-[#000000] border-[#ffffff33] rounded-none break-inside-avoid">
                     <CardHeader className="border-b border-[#ffffff1a] pb-4">
                       <CardTitle className="text-xs font-mono uppercase tracking-widest flex items-center gap-2">
                         <Users className="w-4 h-4" /> Social Impact
@@ -418,11 +415,11 @@ export default function App() {
                   </Card>
                 </div>
 
-                <div className="space-y-6 pt-8 border-t border-[#ffffff33]">
+                <div className="space-y-6 pt-8 border-t border-[#ffffff33] break-inside-avoid">
                   <h2 className="text-xl font-mono font-bold tracking-tight uppercase">Strategic Action Plan</h2>
                   <div className="grid md:grid-cols-2 gap-4">
                     {report.strategicInsights.map((insight, i) => (
-                      <div key={i} className="p-4 border border-[#ffffff33] bg-[#000000] flex gap-4 items-start">
+                      <div key={i} className="p-4 border border-[#ffffff33] bg-[#000000] flex gap-4 items-start break-inside-avoid">
                         <div className="font-mono text-xs text-muted-foreground shrink-0 mt-0.5">
                           [{String(i + 1).padStart(2, '0')}]
                         </div>
