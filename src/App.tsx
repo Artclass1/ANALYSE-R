@@ -1,21 +1,12 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { 
-  Search, 
-  Download, 
-  TrendingUp, 
-  History, 
-  Zap, 
-  Globe, 
   Users, 
-  Brain, 
-  CloudRain,
-  ArrowRight,
   Loader2,
-  FileText,
   BarChart3,
   ShieldAlert,
-  Database
+  Database,
+  Download
 } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { Button } from "@/components/ui/button";
@@ -111,13 +102,11 @@ export default function App() {
 
       <header className="container mx-auto px-6 py-6 flex justify-between items-center border-b border-[#ffffff1a] relative z-10">
         <div className="flex items-center gap-3">
-          <div className="w-6 h-6 bg-[#ffffff] flex items-center justify-center">
-            <Brain className="w-4 h-4 text-[#000000]" />
-          </div>
-          <span className="text-lg font-mono font-bold tracking-tight uppercase">PERSPECTIVE // INTELLIGENCE TERMINAL</span>
+          <div className="w-4 h-4 bg-[#ffffff]" />
+          <span className="text-sm font-mono font-bold tracking-tight uppercase">TERMINAL</span>
         </div>
         <div className="flex items-center gap-4">
-          <Badge variant="outline" className="text-[10px] uppercase tracking-widest font-mono border-[#ffffff33] rounded-none">SYS: ONLINE</Badge>
+          <span className="text-[10px] uppercase tracking-widest font-mono text-muted-foreground">SYS: ONLINE</span>
         </div>
       </header>
 
@@ -131,20 +120,11 @@ export default function App() {
               exit={{ opacity: 0, scale: 0.95 }}
               className="max-w-3xl mx-auto text-center space-y-12"
             >
-              <div className="space-y-4">
-                <h1 className="text-4xl md:text-6xl font-mono font-bold tracking-tighter uppercase">
-                  QUERY ENGINE
-                </h1>
-                <p className="text-muted-foreground font-mono text-sm max-w-xl mx-auto">
-                  Enter parameters for strategic synthesis. System will analyze historical data, present conditions, and future trajectories.
-                </p>
-              </div>
-
-              <div className="relative group max-w-2xl mx-auto">
+              <div className="relative group max-w-2xl mx-auto pt-20">
                 <div className="relative flex items-center bg-[#000000] border border-[#ffffff33] p-1">
                   <span className="font-mono text-muted-foreground pl-4 pr-2">{">"}</span>
                   <Input 
-                    placeholder="Enter sector, market, or business topic..." 
+                    placeholder="Awaiting input..." 
                     className="border-none bg-[#00000000] focus-visible:ring-0 font-mono text-sm h-12 rounded-none"
                     value={prompt}
                     onChange={(e) => setPrompt(e.target.value)}
@@ -157,20 +137,6 @@ export default function App() {
                     Execute
                   </Button>
                 </div>
-              </div>
-
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-12 max-w-3xl mx-auto">
-                {[
-                  { icon: TrendingUp, label: "Market Trends" },
-                  { icon: Globe, label: "Global Politics" },
-                  { icon: Users, label: "Human Tendency" },
-                  { icon: CloudRain, label: "Climate Impact" }
-                ].map((item, i) => (
-                  <div key={i} className="flex flex-col items-center gap-2 p-4 border border-[#ffffff1a] bg-[#000000]">
-                    <item.icon className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-[10px] uppercase tracking-widest font-mono opacity-50">{item.label}</span>
-                  </div>
-                ))}
               </div>
             </motion.div>
           ) : isLoading ? (
@@ -434,14 +400,10 @@ export default function App() {
         </AnimatePresence>
       </main>
 
-      <footer className="fixed bottom-0 w-full bg-[#000000] border-t border-[#ffffff33] py-3 z-20">
-        <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-          <span>&copy; 2026 PERSPECTIVE TERMINAL</span>
-          <div className="flex flex-wrap justify-center gap-4 items-center">
-            <span className="text-[#ffffff]">DEALS & UPDATES: artclassstudio11@gmail.com</span>
-            <span className="opacity-50 hidden md:inline">|</span>
-            <span className="text-[#22c55e]">SYS: OPERATIONAL</span>
-          </div>
+      <footer className="fixed bottom-0 w-full bg-[#000000] border-t border-[#ffffff1a] py-4 z-20">
+        <div className="container mx-auto px-6 flex justify-between items-center font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+          <span>TERMINAL v1.0</span>
+          <span>CONTACT: artclassstudio11@gmail.com</span>
         </div>
       </footer>
     </div>
