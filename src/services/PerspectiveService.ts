@@ -31,20 +31,20 @@ export interface FinancialReport {
 
 export const generateFinancialReport = async (prompt: string): Promise<FinancialReport> => {
   const systemInstruction = `
-    You are an elite financial analyst and strategic consultant. 
-    Your task is to generate an advanced, minimal financial report STRICTLY based on the user's prompt.
+    You are an elite intelligence operative and strategic analyst. 
+    Your task is to generate a highly classified, advanced financial and strategic intelligence dossier STRICTLY based on the user's prompt.
     
     USER PROMPT / TOPIC: "${prompt}"
     
-    The report must cover:
+    The dossier must cover:
     1. History, Present, and Future perspectives for businesses, jobs, stocks, market, and sectors related to the prompt.
     2. AI era economics, global politics, weather, human tendency, and psychology.
     3. Social impact analysis.
     4. Actionable strategic insights.
     5. Quantitative Data: Provide realistic or highly educated estimated metrics for a chart (e.g., market growth, adoption rates, valuation over time) and a structured data table (e.g., sector comparisons, financial projections, or historical data points).
 
-    Style: Professional, minimal, analytical, and forward-thinking.
-    Avoid fluff. Focus on deep, non-obvious perspectives.
+    Style: Professional, minimal, analytical, forward-thinking, and formatted like a highly classified intelligence dossier.
+    Avoid fluff. Focus on deep, non-obvious perspectives and systemic risks/opportunities.
   `;
 
   const response = await ai.models.generateContent({

@@ -5,8 +5,7 @@ import {
   Loader2,
   BarChart3,
   ShieldAlert,
-  Database,
-  Download
+  Database
 } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { Button } from "@/components/ui/button";
@@ -147,11 +146,11 @@ export default function App() {
               exit={{ opacity: 0 }}
               className="max-w-4xl mx-auto space-y-8"
             >
-              <div className="flex flex-col items-center justify-center py-20 space-y-6">
-                <Loader2 className="w-12 h-12 animate-spin text-[#ffffff80]" />
-                <div className="text-center space-y-2">
-                  <h2 className="text-xl font-mono font-bold tracking-tight uppercase">Synthesizing Data</h2>
-                  <p className="text-muted-foreground font-mono text-xs animate-pulse">Running analysis on history, psychology, and future trajectories...</p>
+              <div className="flex flex-col items-center justify-center py-32 space-y-4">
+                <div className="font-mono text-xs text-[#ffffff80] space-y-2 text-left w-full max-w-sm">
+                  <p>{">"} INITIATING HIGH-LEVEL THINKING PROTOCOL...</p>
+                  <p>{">"} ACCESSING GLOBAL DATASTREAMS...</p>
+                  <p className="animate-pulse text-[#ffffff]">{">"} SYNTHESIZING STRATEGIC INTELLIGENCE<span className="animate-ping">_</span></p>
                 </div>
               </div>
               <div className="space-y-4">
@@ -188,9 +187,8 @@ export default function App() {
                     <Button variant="outline" onClick={() => setReport(null)} className="border-[#ffffff33] rounded-none hover:bg-[#ffffff1a] font-mono text-xs uppercase">
                       Reset
                     </Button>
-                    <Button onClick={downloadPDF} className="bg-[#ffffff] text-[#000000] rounded-none hover:bg-[#ffffffE6] font-mono text-xs uppercase">
-                      <Download className="w-3 h-3 mr-2" />
-                      Export PDF
+                    <Button onClick={downloadPDF} className="bg-[#ffffff] text-[#000000] rounded-none hover:bg-[#ffffffE6] font-mono text-xs uppercase font-bold px-6">
+                      [ EXPORT_DOSSIER.PDF ]
                     </Button>
                   </div>
                 </div>
