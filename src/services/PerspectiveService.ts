@@ -1,4 +1,4 @@
-import { GoogleGenAI, Type } from "@google/genai";
+import { GoogleGenAI, Type, ThinkingLevel } from "@google/genai";
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
@@ -48,9 +48,10 @@ export const generateFinancialReport = async (prompt: string): Promise<Financial
   `;
 
   const response = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
-    contents: `Generate a comprehensive financial report for: ${prompt}`,
+    model: "gemini-3.1-pro-preview",
+    contents: `Generate a highly comprehensive, in-depth financial and strategic analysis report for: ${prompt}`,
     config: {
+      thinkingConfig: { thinkingLevel: ThinkingLevel.HIGH },
       systemInstruction,
       responseMimeType: "application/json",
       responseSchema: {
