@@ -73,10 +73,10 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border outline-[#ffffff80];
     }
   body {
-    @apply bg-background text-foreground antialiased selection:bg-white selection:text-black;
+    @apply bg-background text-foreground antialiased selection:bg-[#ffffff] selection:text-[#000000];
     }
   html {
     @apply font-sans;
@@ -85,9 +85,14 @@
 
 @layer utilities {
   .glass {
-    @apply bg-white/5 backdrop-blur-md border border-white/10;
+    @apply bg-[#ffffff0d] backdrop-blur-md border border-[#ffffff1a];
   }
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-br from-white to-white/50;
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-[#ffffff] to-[#ffffff80];
+  }
+  .pdf-export-mode {
+    width: 1200px !important;
+    max-width: 1200px !important;
+    margin: 0 auto;
   }
 }

@@ -11,6 +11,15 @@ export interface FinancialReport {
     perspective: "History" | "Present" | "Future";
     insights: string[];
   }[];
+  quantitativeData: {
+    chartTitle: string;
+    chartData: { period: string; value: number }[];
+    tableTitle: string;
+    tableData: {
+      headers: string[];
+      rows: string[][];
+    };
+  };
   strategicInsights: string[];
   socialImpactAnalysis: string;
   marketOutlook: {
@@ -23,12 +32,16 @@ export interface FinancialReport {
 export const generateFinancialReport = async (prompt: string): Promise<FinancialReport> => {
   const systemInstruction = `
     You are an elite financial analyst and strategic consultant. 
-    Your task is to generate an advanced, minimal financial report based on the user's prompt.
+    Your task is to generate an advanced, minimal financial report STRICTLY based on the user's prompt.
+    
+    USER PROMPT / TOPIC: "${prompt}"
+    
     The report must cover:
-    1. History, Present, and Future perspectives for businesses, jobs, stocks, market, and sectors.
+    1. History, Present, and Future perspectives for businesses, jobs, stocks, market, and sectors related to the prompt.
     2. AI era economics, global politics, weather, human tendency, and psychology.
     3. Social impact analysis.
     4. Actionable strategic insights.
+    5. Quantitative Data: Provide realistic or highly educated estimated metrics for a chart (e.g., market growth, adoption rates, valuation over time) and a structured data table (e.g., sector comparisons, financial projections, or historical data points).
 
     Style: Professional, minimal, analytical, and forward-thinking.
     Avoid fluff. Focus on deep, non-obvious perspectives.
@@ -58,6 +71,39 @@ export const generateFinancialReport = async (prompt: string): Promise<Financial
               required: ["title", "content", "perspective", "insights"]
             }
           },
+          quantitativeData: {
+            type: Type.OBJECT,
+            properties: {
+              chartTitle: { type: Type.STRING },
+              chartData: {
+                type: Type.ARRAY,
+                items: {
+                  type: Type.OBJECT,
+                  properties: {
+                    period: { type: Type.STRING },
+                    value: { type: Type.NUMBER }
+                  },
+                  required: ["period", "value"]
+                }
+              },
+              tableTitle: { type: Type.STRING },
+              tableData: {
+                type: Type.OBJECT,
+                properties: {
+                  headers: { type: Type.ARRAY, items: { type: Type.STRING } },
+                  rows: {
+                    type: Type.ARRAY,
+                    items: {
+                      type: Type.ARRAY,
+                      items: { type: Type.STRING }
+                    }
+                  }
+                },
+                required: ["headers", "rows"]
+              }
+            },
+            required: ["chartTitle", "chartData", "tableTitle", "tableData"]
+          },
           strategicInsights: { type: Type.ARRAY, items: { type: Type.STRING } },
           socialImpactAnalysis: { type: Type.STRING },
           marketOutlook: {
@@ -70,7 +116,7 @@ export const generateFinancialReport = async (prompt: string): Promise<Financial
             required: ["sentiment", "keyDrivers", "riskFactors"]
           }
         },
-        required: ["title", "summary", "sections", "strategicInsights", "socialImpactAnalysis", "marketOutlook"]
+        required: ["title", "summary", "sections", "quantitativeData", "strategicInsights", "socialImpactAnalysis", "marketOutlook"]
       }
     }
   });
